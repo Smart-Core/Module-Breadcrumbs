@@ -4,7 +4,7 @@
  */
 namespace SmartCore\Module\Breadcrumbs\Controller;
 
-use SmartCore\Bundle\EngineBundle\Engine\Module;
+use SmartCore\Bundle\EngineBundle\Controller\Module;
  
 class Breadcrumbs extends Module
 {
