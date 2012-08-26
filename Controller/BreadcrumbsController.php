@@ -4,10 +4,10 @@
  */
 namespace SmartCore\Module\Breadcrumbs\Controller;
 
-use SmartCore\Bundle\EngineBundle\Controller\Module;
+use SmartCore\Bundle\EngineBundle\Module\Controller;
 use SmartCore\Bundle\EngineBundle\Response;
  
-class BreadcrumbsController extends Module
+class BreadcrumbsController extends Controller
 {
     /**
      * Разделитель.
