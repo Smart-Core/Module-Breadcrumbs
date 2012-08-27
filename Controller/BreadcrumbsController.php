@@ -38,7 +38,7 @@ class BreadcrumbsController extends Controller
     public function indexAction($router_params = null)
     {
         $this->View->delimiter = $this->delimiter;
-        $this->View->Items = $this->Breadcrumbs;
+        $this->View->Items = $this->engine('breadcrumbs');
         $this->View->hide_if_only_home = $this->hide_if_only_home;
 
         return new Response($this->View);
