@@ -18,12 +18,12 @@ class Module_Breadcrumbs_Admin extends Module_Breadcrumbs implements Admin_Modul
                 'label' => 'Разделитель:',
                 'type'  => 'text',
                 'value' => $this->delimiter,
-                ),
+            ),
             'hide_if_only_home' => array(
                 'label' => 'Скрыть, если выбрана корневая папка:',
                 'type'  => 'checkbox',
                 'value' => $this->hide_if_only_home,
-                ),
-            );
+            ),
+        );
     }
 }
