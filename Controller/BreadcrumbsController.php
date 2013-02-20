@@ -26,10 +26,7 @@ class BreadcrumbsController extends Controller
      */
     protected function init()
     {
-        $this->View->setOptions(array(
-            'engine'        => 'simple',
-            'template_ext'  => '.tpl',
-        ));
+        $this->View->setEngine('php');
     }
 
     /**
@@ -38,7 +35,7 @@ class BreadcrumbsController extends Controller
     public function indexAction($router_params = null)
     {
         $this->View->delimiter = $this->delimiter;
-        $this->View->Items = $this->engine('breadcrumbs');
+        $this->View->items = $this->engine('breadcrumbs');
         $this->View->hide_if_only_home = $this->hide_if_only_home;
 
         return new Response($this->View);
