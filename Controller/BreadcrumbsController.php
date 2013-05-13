@@ -6,6 +6,7 @@ namespace SmartCore\Module\Breadcrumbs\Controller;
 
 use SmartCore\Bundle\EngineBundle\Module\Controller;
 use SmartCore\Bundle\EngineBundle\Response;
+use SmartCore\Module\Breadcrumbs\Breadcrumbs;
  
 class BreadcrumbsController extends Controller
 {
@@ -32,10 +33,25 @@ class BreadcrumbsController extends Controller
     /**
      * Запуск модуля.
      */
-    public function indexAction($router_params = null)
+    public function indexAction()
     {
+        $router_data = $this->get('engine.folder')->getRouterData();
+
+        $breadcrumbs = new Breadcrumbs();
+
+        // Формирование "Хлебных крошек".
+        /** @var $folder \SmartCore\Bundle\EngineBundle\Entity\Folder */
+        foreach ($router_data['folders'] as $folder) {
+            $breadcrumbs->add($folder->getUri(), $folder->getTitle(), $folder->getDescr());
+        }
+        if ($router_data['node_route']['response']) {
+            foreach ($router_data['node_route']['response']->getBreadcrumbs() as $bc) {
+                $breadcrumbs->add($bc['uri'], $bc['title'], $bc['descr']);
+            }
+        }
+
         $this->View->delimiter = $this->delimiter;
-        $this->View->items = $this->get('engine.breadcrumbs');
+        $this->View->items = $breadcrumbs;
         $this->View->hide_if_only_home = $this->hide_if_only_home;
 
         return new Response($this->View);
