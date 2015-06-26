@@ -2,8 +2,8 @@
 
 namespace SmartCore\Module\Breadcrumbs;
 
-use SmartCore\Bundle\EngineBundle\Module\Bundle;
+use SmartCore\Bundle\CMSBundle\Module\ModuleBundle;
 
-class BreadcrumbsModule extends Bundle
+class BreadcrumbsModule extends ModuleBundle
 {
 }

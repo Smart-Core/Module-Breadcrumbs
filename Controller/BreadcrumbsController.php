@@ -1,59 +1,43 @@
 <?php
-/**
- * Хлебные крошки (Дублирующая навигация).
- */
+
 namespace SmartCore\Module\Breadcrumbs\Controller;
 
-use SmartCore\Bundle\EngineBundle\Module\Controller;
-use SmartCore\Bundle\EngineBundle\Response;
-use SmartCore\Module\Breadcrumbs\Breadcrumbs;
- 
+use SmartCore\Bundle\CMSBundle\Module\NodeTrait;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 class BreadcrumbsController extends Controller
 {
+    use NodeTrait;
+
     /**
      * Разделитель.
+     *
      * @var string
      */
-    protected $delimiter = '&raquo;';
+    protected $delimiter = '»'; //'&raquo;'; // @todo подумать как можно в форме свойств ноды, экранировать спец символы.
 
     /**
      * Скрыть "хлебные крошки", если выбрана корневая папка.
+     *
      * @var bool
      */
     protected $hide_if_only_home = false;
 
     /**
-     * Конструктор.
+     * @var string|null
      */
-    protected function init()
-    {
-        $this->View->setEngine('php');
-    }
+    protected $css_class = null;
 
     /**
-     * Запуск модуля.
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
-        $router_data = $this->get('engine.folder')->getRouterData();
-
-        $breadcrumbs = new Breadcrumbs();
-
-        // Формирование "Хлебных крошек".
-        /** @var $folder \SmartCore\Bundle\EngineBundle\Entity\Folder */
-        foreach ($router_data['folders'] as $folder) {
-            $breadcrumbs->add($folder->getUri(), $folder->getTitle(), $folder->getDescr());
-        }
-        if ($router_data['node_route']['response']) {
-            foreach ($router_data['node_route']['response']->getBreadcrumbs() as $bc) {
-                $breadcrumbs->add($bc['uri'], $bc['title'], $bc['descr']);
-            }
-        }
-
-        $this->View->delimiter = $this->delimiter;
-        $this->View->items = $breadcrumbs;
-        $this->View->hide_if_only_home = $this->hide_if_only_home;
-
-        return new Response($this->View);
+        return $this->render('BreadcrumbsModule::breadcrumbs.html.php', [
+            'css_class' => $this->css_class,
+            'delimiter' => $this->delimiter,
+            'items'     => $this->get('cms.breadcrumbs'),
+            'hide_if_only_home' => $this->hide_if_only_home,
+        ]);
     }
 }

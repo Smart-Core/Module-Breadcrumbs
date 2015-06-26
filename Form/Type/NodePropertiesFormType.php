@@ -2,32 +2,25 @@
 
 namespace SmartCore\Module\Breadcrumbs\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
+use SmartCore\Bundle\CMSBundle\Form\DataTransformer\HtmlTransformer;
+use SmartCore\Bundle\CMSBundle\Module\AbstractNodePropertiesFormType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use SmartCore\Bundle\EngineBundle\Container;
 
-class NodePropertiesFormType extends AbstractType
+class NodePropertiesFormType extends AbstractNodePropertiesFormType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('delimiter', 'text', [            // Разделитель
-                'attr' => ['class' => 'focused'],
-            ])
-            ->add('hide_if_only_home', 'checkbox')  // Скрыть, если выбрана корневая папка
+            ->add($builder->create('delimiter', 'text', [
+                'attr' => ['autofocus' => 'autofocus'],
+                ])->addViewTransformer(new HtmlTransformer()))
+            ->add('hide_if_only_home', 'checkbox', ['required' => false])  // Скрыть, если выбрана корневая папка
+            ->add('css_class', 'text', ['required' => false])              // CSS class div блока
         ;
-    }
-
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults([
-            'csrf_protection' => false,
-        ]);
     }
 
     public function getName()
     {
-        return 'breadcrumbs_node_properties';
+        return 'smart_module_breadcrumbs_node_properties';
     }
 }
