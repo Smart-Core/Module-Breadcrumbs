@@ -13,7 +13,7 @@ class NodePropertiesFormType extends AbstractNodePropertiesFormType
         $builder
             ->add($builder->create('delimiter', 'text', [
                 'attr' => ['autofocus' => 'autofocus'],
-                ])->addViewTransformer(new HtmlTransformer()))
+                ])->addViewTransformer(new HtmlTransformer(false)))
             ->add('hide_if_only_home', 'checkbox', ['required' => false])  // Скрыть, если выбрана корневая папка
             ->add('css_class', 'text', ['required' => false])              // CSS class div блока
         ;

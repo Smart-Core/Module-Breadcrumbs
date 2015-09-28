@@ -14,7 +14,7 @@ class BreadcrumbsController extends Controller
      *
      * @var string
      */
-    protected $delimiter = '»'; //'&raquo;'; // @todo подумать как можно в форме свойств ноды, экранировать спец символы.
+    protected $delimiter = '&raquo;'; // '»';
 
     /**
      * Скрыть "хлебные крошки", если выбрана корневая папка.
