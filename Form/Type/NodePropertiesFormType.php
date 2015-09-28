@@ -2,7 +2,7 @@
 
 namespace SmartCore\Module\Breadcrumbs\Form\Type;
 
-use SmartCore\Bundle\CMSBundle\Form\DataTransformer\HtmlTransformer;
+use Smart\CoreBundle\Form\DataTransformer\HtmlTransformer;
 use SmartCore\Bundle\CMSBundle\Module\AbstractNodePropertiesFormType;
 use Symfony\Component\Form\FormBuilderInterface;
 
