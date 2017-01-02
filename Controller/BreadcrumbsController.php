@@ -2,8 +2,8 @@
 
 namespace SmartCore\Module\Breadcrumbs\Controller;
 
+use Smart\CoreBundle\Controller\Controller;
 use SmartCore\Bundle\CMSBundle\Module\NodeTrait;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class BreadcrumbsController extends Controller
 {
@@ -33,7 +33,7 @@ class BreadcrumbsController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('BreadcrumbsModule::breadcrumbs.html.php', [
+        return $this->render('@BreadcrumbsModule/breadcrumbs.html.php', [
             'css_class' => $this->css_class,
             'delimiter' => $this->delimiter,
             'items'     => $this->get('cms.breadcrumbs'),
